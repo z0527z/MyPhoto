@@ -46,10 +46,7 @@ static NSString * MyCellIndentifier = @"MyCell";
     [super viewDidLoad];
 
     self.navigationItem.title = @"相册";
-    UITableView * tblView = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] bounds] style:UITableViewStylePlain];
-    tblView.delegate = self;
-    tblView.dataSource = self;
-    self.tableView = tblView;
+    self.tableView = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] bounds] style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.urlArray = [NSMutableArray array];
@@ -69,7 +66,7 @@ static NSString * MyCellIndentifier = @"MyCell";
     
     NSLog(@"urlcount:%d",self.urlArray.count);
     
-    [self.view addSubview:tblView];
+    [self.view addSubview:_tableView];
 	
 }
 
