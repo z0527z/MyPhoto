@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2226C7CD18B09EC20058D2CD /* imageUrl.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2226C7CC18B09EC20058D2CD /* imageUrl.plist */; };
+		2226C7D218B0B5890058D2CD /* Beauty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2226C7D118B0B5890058D2CD /* Beauty.m */; };
 		223CCC6418498BA600C4D1FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223CCC6318498BA600C4D1FF /* Foundation.framework */; };
 		223CCC6618498BA600C4D1FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223CCC6518498BA600C4D1FF /* CoreGraphics.framework */; };
 		223CCC6818498BA600C4D1FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223CCC6718498BA600C4D1FF /* UIKit.framework */; };
@@ -37,6 +39,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2226C7CC18B09EC20058D2CD /* imageUrl.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = imageUrl.plist; sourceTree = "<group>"; };
+		2226C7CE18B0A4740058D2CD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		2226C7CF18B0A4740058D2CD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		2226C7D018B0B5890058D2CD /* Beauty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beauty.h; sourceTree = "<group>"; };
+		2226C7D118B0B5890058D2CD /* Beauty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Beauty.m; sourceTree = "<group>"; };
 		223CCC6018498BA500C4D1FF /* MyPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		223CCC6318498BA600C4D1FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		223CCC6518498BA600C4D1FF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -124,6 +131,8 @@
 			children = (
 				223CCC7218498BA600C4D1FF /* AppDelegate.h */,
 				223CCC7318498BA600C4D1FF /* AppDelegate.m */,
+				2226C7D018B0B5890058D2CD /* Beauty.h */,
+				2226C7D118B0B5890058D2CD /* Beauty.m */,
 				223CCC9818498CCC00C4D1FF /* MyViewController.h */,
 				223CCC9918498CCC00C4D1FF /* MyViewController.m */,
 				22E8B2F3184B2433004FF83B /* 57.png */,
@@ -137,6 +146,7 @@
 		223CCC6A18498BA600C4D1FF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2226C7CC18B09EC20058D2CD /* imageUrl.plist */,
 				223CCC6B18498BA600C4D1FF /* MyPhoto-Info.plist */,
 				223CCC6C18498BA600C4D1FF /* InfoPlist.strings */,
 				223CCC6F18498BA600C4D1FF /* main.m */,
@@ -222,6 +232,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 223CCC5718498BA500C4D1FF;
 			productRefGroup = 223CCC6118498BA500C4D1FF /* Products */;
@@ -241,6 +252,7 @@
 			files = (
 				22EDEC1B18499B9E00E0B543 /* 114.png in Resources */,
 				22E8B2F4184B2433004FF83B /* 57.png in Resources */,
+				2226C7CD18B09EC20058D2CD /* imageUrl.plist in Resources */,
 				223CCC7C18498BA600C4D1FF /* Images.xcassets in Resources */,
 				223CCC6E18498BA600C4D1FF /* InfoPlist.strings in Resources */,
 			);
@@ -262,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				223CCC9A18498CCC00C4D1FF /* MyViewController.m in Sources */,
+				2226C7D218B0B5890058D2CD /* Beauty.m in Sources */,
 				223CCC7418498BA600C4D1FF /* AppDelegate.m in Sources */,
 				223CCC7018498BA600C4D1FF /* main.m in Sources */,
 			);
@@ -290,6 +303,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				223CCC6D18498BA600C4D1FF /* en */,
+				2226C7CE18B0A4740058D2CD /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -298,6 +312,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				223CCC8C18498BA600C4D1FF /* en */,
+				2226C7CF18B0A4740058D2CD /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

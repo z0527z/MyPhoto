@@ -8,9 +8,13 @@
 
 #import "MyViewController.h"
 #import "SDWebImage.framework/Headers/UIImageView+WebCache.h"
+#import "Beauty.h"
 
+#define kCellImageWidth 55
+#define kCellImageHeight kCellImageWidth
+
+/*
 static NSString * MyCellIndentifier = @"MyCell";
-
 @interface MyTableViewCell : UITableViewCell
 
 @end
@@ -22,7 +26,6 @@ static NSString * MyCellIndentifier = @"MyCell";
     return [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyCellIndentifier];
 }
 
-/*
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -30,12 +33,12 @@ static NSString * MyCellIndentifier = @"MyCell";
     self.textLabel.frame = CGRectMake(65, 5, 50, 20);
     self.detailTextLabel.frame = CGRectMake(65, self.detailTextLabel.frame.origin.y, self.detailTextLabel.frame.size.width, self.detailTextLabel.frame.size.height);
 }
-*/
 
 @end
+*/
 
 @interface MyViewController ()
-@property(nonatomic, strong) NSMutableArray * urlArray;
+@property(nonatomic, strong) NSMutableArray * contentArray;
 @property(nonatomic, strong) UITableView * tableView;
 @end
 
@@ -46,11 +49,13 @@ static NSString * MyCellIndentifier = @"MyCell";
     [super viewDidLoad];
 
     self.navigationItem.title = @"相册";
+    
     self.tableView = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] bounds] style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.urlArray = [NSMutableArray array];
-    
+    self.contentArray = [NSMutableArray array];
+    /*
+    // 加载Url方法一
     NSURL * url = [NSURL URLWithString:@"http://c.hiphotos.baidu.com/image/w%3D2048/sign=2908f41a9045d688a302b5a490fa7c1e/a50f4bfbfbedab64e9ba70e9f536afc378311eca.jpg"];
     [self.urlArray addObject:url];
     url = [NSURL URLWithString:@"http://a.hiphotos.baidu.com/image/w%3D2048/sign=9927ed296509c93d07f209f7ab05f8dc/d50735fae6cd7b89ce619da40d2442a7d9330e83.jpg"];
@@ -63,8 +68,17 @@ static NSString * MyCellIndentifier = @"MyCell";
     [self.urlArray addObject:url];
     url = [NSURL URLWithString:@"http://d.hiphotos.baidu.com/image/w%3D2048/sign=86d4aac191ef76c6d0d2fc2ba92efcfa/b03533fa828ba61ecbdab0cf4034970a304e591d.jpg"];
     [self.urlArray addObject:url];
+    */
     
-    NSLog(@"urlcount:%d",self.urlArray.count);
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"imageUrl" ofType:@"plist"];
+    NSArray * array = [NSArray arrayWithContentsOfFile:path];
+    
+    for (NSDictionary * dict in array) {
+        @autoreleasepool {
+            Beauty * beauty = [Beauty beautyWithDictionary:dict];
+            [self.contentArray addObject:beauty];
+        }
+    }
     
     [self.view addSubview:_tableView];
 	
@@ -77,28 +91,39 @@ static NSString * MyCellIndentifier = @"MyCell";
 
 #pragma mark -
 #pragma mark Delegate
+// 动态适应cell高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 66;
+    UITableViewCell * cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    UIImageView * imageView = (UIImageView *)[cell viewWithTag:1000];
+    return imageView.frame.size.height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
-    [imageView setImageWithURL:[self.urlArray objectAtIndex:indexPath.row]];
+    [imageView setImageWithURL:((Beauty *)[self.contentArray objectAtIndex:indexPath.row]).url];
     
     UIViewController * viewController = [[UIViewController alloc] init];
     [viewController.view addSubview:imageView];
-    viewController.navigationItem.title = [NSString stringWithFormat:@"美女%d", indexPath.row + 1];
+    viewController.navigationItem.title = ((Beauty *)([self.contentArray objectAtIndex:indexPath.row])).name;
     
     [self.navigationController pushViewController:viewController animated:YES];
+}
+// 编辑模式，只要实现该函数就会出现滑动删除按钮
+- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(editingStyle != UITableViewCellEditingStyleDelete) return;
+    
+    [_contentArray removeObjectAtIndex:indexPath.row];
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
 }
 
 #pragma mark -
 #pragma mark DataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.urlArray.count;
+    return self.contentArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -127,22 +152,21 @@ static NSString * MyCellIndentifier = @"MyCell";
         // 方法二：自己定义UIImageView，然后设置其为cell的子视图，与方法一类似，缺点：如果后面需要对cell的子视图显示的内容进行修改
         // 会比较复杂
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-        UIImageView* photoView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 55, 55)];
-        [photoView setImageWithURL:[self.urlArray objectAtIndex:indexPath.row] placeholderImage:[UIImage imageNamed:@"114.png"]];
-        //[photoView setTag:1000];
-        //UIImageView* photoView = (UIImageView*)[cell viewWithTag:1000];
-        [cell addSubview:photoView];
+        UIImageView* photoView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 0, kCellImageWidth, kCellImageHeight)];
+        [photoView setImageWithURL:((Beauty *)([self.contentArray objectAtIndex:indexPath.row])).url placeholderImage:[UIImage imageNamed:@"114.png"]];
+        [photoView setTag:1000];
+        [cell.contentView addSubview:photoView];
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake(65, photoView.frame.origin.y + 5, 50, 20)];
+        UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake(photoView.frame.origin.x + photoView.frame.size.width + 10, photoView.frame.origin.y + 5, 100, 20)];
         [textLabel setFont:[UIFont systemFontOfSize:18.0f]];
-        textLabel.text = [NSString stringWithFormat:@"美女%d", indexPath.row + 1];
-        [cell addSubview:textLabel];
+        textLabel.text = ((Beauty *)([self.contentArray objectAtIndex:indexPath.row])).name;
+        [cell.contentView addSubview:textLabel];
         
-        UILabel * detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(65, textLabel.frame.origin.y + 30, 150, 15)];
+        UILabel * detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(textLabel.frame.origin.x, textLabel.frame.origin.y + 30, 200, 15)];
         [detailLabel setFont:[UIFont systemFontOfSize:12.0f]];
-        detailLabel.text = @"校花级的美女，养养眼----";
-        [cell addSubview:detailLabel];
+        detailLabel.text = ((Beauty *)([self.contentArray objectAtIndex:indexPath.row])).desc;
+        [cell.contentView addSubview:detailLabel];
         
         //NSLog(@"subViews:%d", cell.subviews.count);
         
@@ -154,9 +178,6 @@ static NSString * MyCellIndentifier = @"MyCell";
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-
-    self.urlArray = nil;
-    self.tableView = nil;
 }
 
 @end

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>desc</key>
+		<string>支持下母校，咩哈哈~~~~</string>
+		<key>name</key>
+		<string>师大校花</string>
+		<key>url</key>
+		<string>http://d.hiphotos.baidu.com/image/w%3D2048/sign=86d4aac191ef76c6d0d2fc2ba92efcfa/b03533fa828ba61ecbdab0cf4034970a304e591d.jpg</string>
+	</dict>
+	<dict>
+		<key>desc</key>
+		<string>给本土也分配两个吧，嘎嘎~~这个就认为是湖大的吧</string>
+		<key>name</key>
+		<string>湖大校花</string>
+		<key>url</key>
+		<string>http://d.hiphotos.baidu.com/image/w%3D2048/sign=1ad475115b82b2b7a79f3ec40595caef/b58f8c5494eef01f81b9f5d0e2fe9925bc317d72.jpg</string>
+	</dict>
+	<dict>
+		<key>desc</key>
+		<string>貌似和浙大的同一个，还是说我眼花~\(≧▽≦)/~啦啦啦</string>
+		<key>name</key>
+		<string>复旦校花</string>
+		<key>url</key>
+		<string>http://d.hiphotos.baidu.com/image/w%3D2048/sign=3eab5639950a304e5222a7fae5f0a686/80cb39dbb6fd526613a21e29a918972bd4073605.jpg</string>
+	</dict>
+	<dict>
+		<key>desc</key>
+		<string>好一双销魂的电眼啊~~~</string>
+		<key>name</key>
+		<string>浙大校花</string>
+		<key>url</key>
+		<string>http://f.hiphotos.baidu.com/image/w%3D2048/sign=7c3ff04e7aec54e741ec1d1e8d009b50/574e9258d109b3dec1829918cdbf6c81800a4c84.jpg</string>
+	</dict>
+	<dict>
+		<key>desc</key>
+		<string>穿的比较性感，网上的图片，反正也不知道谁来着~~~</string>
+		<key>name</key>
+		<string>北大校花</string>
+		<key>url</key>
+		<string>http://a.hiphotos.baidu.com/image/w%3D2048/sign=9927ed296509c93d07f209f7ab05f8dc/d50735fae6cd7b89ce619da40d2442a7d9330e83.jpg</string>
+	</dict>
+	<dict>
+		<key>desc</key>
+		<string>不知道是谁来着，随便描述描述~~~</string>
+		<key>name</key>
+		<string>清华校花</string>
+		<key>url</key>
+		<string>http://c.hiphotos.baidu.com/image/w%3D2048/sign=2908f41a9045d688a302b5a490fa7c1e/a50f4bfbfbedab64e9ba70e9f536afc378311eca.jpg</string>
+	</dict>
+</array>
+</plist>
